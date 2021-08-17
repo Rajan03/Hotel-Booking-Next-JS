@@ -5,7 +5,7 @@ import {
   Stars,
   LocationPin,
   Rating,
-  LocationBtn,
+  InlineBtn,
 } from "./StyleComponents";
 
 function HotelHeader() {
@@ -21,9 +21,9 @@ function HotelHeader() {
         </Stars>
         <LocationPin>
           <FaMapPin />
-          <LocationBtn>
+          <InlineBtn>
             <span>Albufeira, Portugal</span>
-          </LocationBtn>
+          </InlineBtn>
         </LocationPin>
         <Rating>
           <div>8.6</div>

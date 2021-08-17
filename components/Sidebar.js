@@ -8,10 +8,10 @@ import {
 } from "./StyleComponents";
 
 const navLinks = [
-  { name: "home", icon: "", active: true },
-  { name: "rooms", icon: "", active: false },
-  { name: "services", icon: "", active: false },
-  { name: "contact", icon: "", active: false },
+  { name: "home", link: "/", icon: "", active: true },
+  { name: "rooms", link: "/rooms", icon: "", active: false },
+  { name: "services", link: "/", icon: "", active: false },
+  { name: "contact", link: "/", icon: "", active: false },
 ];
 
 const Sidebar = () => {
@@ -26,7 +26,7 @@ const Sidebar = () => {
             activeLink={activeLink === i}
             onClick={() => setActiveLink(i)}
           >
-            <Link href={link !== "home" ? `/${link.name}` : "/"} passHref>
+            <Link href={link.link} passHref>
               <a>{link.name}</a>
             </Link>
           </SidebarListItem>

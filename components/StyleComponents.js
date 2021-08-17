@@ -237,6 +237,12 @@ export const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 56.25em) {
+    & {
+      min-height: auto;
+    }
+  }
 `;
 export const SidebarList = styled.ul`
   font-size: 1.4rem;
@@ -514,7 +520,7 @@ export const Rating = styled.div`
     }
   }
 `;
-export const LocationBtn = styled.button`
+export const InlineBtn = styled.button`
   border: none;
   color: ${(props) => props.theme.primary.main};
   font-size: inherit;
@@ -539,4 +545,286 @@ export const LocationBtn = styled.button`
   :focus {
     outline: none;
   }
+`;
+export const HotelDetails = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  background-color: ${(props) => props.theme.secondary.light2};
+  border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
+  color: ${(props) => props.theme.secondary.dark2};
+  line-height: 2rem;
+
+  @media (max-width: 56.25em) {
+    & {
+      padding: 1rem;
+    }
+  }
+  @media (max-width: 37.5em) {
+    & {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+  }
+`;
+export const HotelDescription = styled.div`
+  background-color: ${(props) => props.theme.secondary.white};
+  -webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 60%;
+  flex: 0 0 60%;
+  margin-right: 4.5rem;
+  padding: 3.5rem;
+
+  @media (max-width: 56.25em) {
+    & {
+      padding: 2rem;
+      margin-right: 3rem;
+    }
+  }
+
+  @media (max-width: 37.5em) {
+    & {
+      margin-right: 0;
+      margin-bottom: 3rem;
+    }
+  }
+`;
+export const TextParahs = styled.p`
+  :not(:last-of-type) {
+    margin-bottom: 3rem;
+  }
+`;
+export const DetailList = styled.ul`
+  margin: 3rem 0rem;
+  list-style: none;
+  padding: 3rem 0rem;
+  border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
+  border-top: 0.1rem solid ${(props) => props.theme.secondary.light2};
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  & li {
+    -webkit-box-flex: 50%;
+    -ms-flex: 50%;
+    flex: 50%;
+    margin-bottom: 1rem;
+
+    ::before {
+      content: "";
+      display: inline-block;
+      height: 1rem;
+      width: 1rem;
+      margin-right: 0.7rem;
+      background-color: ${(props) => props.theme.primary.main};
+    }
+  }
+`;
+export const RecommendedSection = styled.div`
+  font-size: 1.3rem;
+  color: ${(props) => props.theme.secondary.dark3};
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  & > p {
+    margin-right: auto;
+  }
+
+  & > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  & img {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 4rem;
+    border-radius: 50%;
+    border: 0.3rem solid ${(props) => props.theme.secondary.white};
+
+    :not(:last-child) {
+      margin-right: -1.8rem;
+    }
+  }
+`;
+export const UserReview = styled.div`
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  & figure {
+    background-color: ${(props) => props.theme.secondary.white};
+    -webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+
+    ::before {
+      content: "";
+      position: absolute;
+      line-height: 1;
+      top: -2.75rem;
+      left: -0.9rem;
+      font-size: 20rem;
+      z-index: 1;
+      font-family: sans-serif;
+      color: ${(props) => props.theme.secondary.light3};
+    }
+
+    @media (max-width: 56.25em) {
+      & {
+        margin-bottom: 3rem;
+        padding: 2rem;
+      }
+    }
+  }
+
+  & blockquote {
+    z-index: 10;
+    position: relative;
+  }
+
+  & figcaption {
+    margin-top: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  & img {
+    border-radius: 50%;
+  }
+
+  & .review_box {
+    margin-right: auto;
+
+    & p:first-child {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    & p:last-child {
+      font-size: 1rem;
+      color: ${(props) => props.theme.secondary.dark3};
+    }
+  }
+
+  & .review_rating {
+    color: ${(props) => props.theme.primary.main};
+    font-size: 2.2rem;
+    font-weight: 300;
+  }
+
+  & div:first-child {
+    margin-right: 2rem !important;
+  }
+`;
+export const CtaBtnSection = styled.div`
+  padding: 3.5rem 0;
+  text-align: center;
+  color: ${(props) => props.theme.secondary.dark3};
+
+  & h2 {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 56.25em) {
+    & {
+      padding: 2.5rem 0;
+    }
+  }
+`;
+export const VisibleAnimatedBtn = styled.button`
+  font-size: 1.3rem;
+  border: none;
+  font-weight: 300;
+  text-transform: uppercase;
+  position: relative;
+  border-radius: 100px;
+  overflow: hidden;
+  background: ${(props) => props.theme.primary.light};
+  color: ${(props) => props.theme.secondary.white};
+  cursor: pointer;
+
+  > * {
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  :focus {
+    outline: none;
+    -webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.07);
+  }
+
+  :hover {
+    background: ${(props) => props.theme.primary.main};
+
+    & span:last-child {
+      top: 0;
+    }
+    & span:first-child {
+      transform: translateY(100%);
+    }
+  }
+
+  & span:first-child {
+    padding: 2rem 7.5rem;
+  }
+
+  & span:last-child {
+    padding: 2rem 0rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    top: -100%;
+  }
+`;
+export const RoomWrapper = styled.div`
+  min-height: 10rem;
+  min-width: 20rem;
+  background-color: bisque;
+  display: inline-block;
+  margin: 1rem;
+
+  & > div {
+    background-image: url(${props => props.url});
+    background-size: cover;
+    backface-visibility: hidden;
+    background-clip: polygon(0 0, 100% 0, 100% 90%, 0 0);
+ }
 `;

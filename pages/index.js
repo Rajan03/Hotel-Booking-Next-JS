@@ -4,23 +4,18 @@ import HotelGallery from "../components/HotelGallery";
 import HotelHeader from "../components/HotelHeader";
 import Layout from "../components/Layout";
 import UserReviews from "../components/UserReviews";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../utils/themes/Theme";
-import { GlobalStyles } from "../components/StyleComponents";
+import {  HotelDetails } from "../components/StyleComponents";
 
 export default function Home() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles/>
-      <Layout>
-        <HotelGallery />
-        <HotelHeader />
-        <div className="detail">
-          <Description />
-          <UserReviews />
-        </div>
-        <CtaSection />
-      </Layout>
-    </ThemeProvider>
+    <Layout>
+      <HotelGallery />
+      <HotelHeader />
+      <HotelDetails>
+        <Description />
+        <UserReviews />
+      </HotelDetails>
+      <CtaSection />
+    </Layout>
   );
 }
