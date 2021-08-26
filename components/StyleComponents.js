@@ -1,4 +1,23 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
+
+// Animations
+const backgroundAnimate = keyframes`
+ 0% {
+   background: rgba(0,0,0, 0);
+}
+ 100% { 
+   background: rgba(0,0,0, .7); 
+   transform: translateX(0rem);
+ }
+`;
+const tranformSide = keyframes`
+ 0% {
+   transform: translateX(0rem)
+}
+ 100% { 
+   transform: translateX(100rem)
+ }
+`;
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -18,7 +37,10 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-
+@font-face {
+     font-family: 'Prompt';
+     src: url('../public/fonts/Prompt-Regular.ttf');
+  }
 @media only screen and (max-width: 68.75em) {
   html {
     font-size: 53%;
@@ -64,13 +86,20 @@ export const HotelContent = styled.div`
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  min-height: 90vh;
+  max-height: max-content;
+  overflow-y: scroll;
+
+  @media (max-width: 400px) {
+    min-height: 150vh;
+  }
 `;
 
 //  Navbar Starts
 export const NavHeader = styled.div`
   font-size: 1.4rem;
   background-color: ${(props) => props.theme.secondary.white};
-  height: 6rem;
+  min-height: 6rem;
   border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
   display: flex;
   justify-content: space-between;
@@ -79,7 +108,7 @@ export const NavHeader = styled.div`
   @media (max-width: 31.25em) {
     & {
       flex-wrap: wrap;
-      height: 11rem;
+      min-height: 11rem;
       align-content: space-around;
     }
   }
@@ -233,7 +262,6 @@ export const ProfileIcon = styled.div`
 export const SidebarContainer = styled.div`
   background-color: ${(props) => props.theme.secondary.dark1};
   flex: 0 0 18%;
-  min-height: 60.7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -260,9 +288,8 @@ export const SidebarList = styled.ul`
     }
   }
 `;
-export const SidebarListItem = styled.li`
+export const SidebarListItem = styled.div`
   position: relative;
-
   background-color: ${(props) => props.activeLink && props.theme.primary.light};
 
   @media (max-width: 56.25em) {
@@ -401,8 +428,9 @@ export const GalleryContainer = styled.div`
     }
   }
 `;
+//  Gallery Images Ends
 
-// Hotel header
+// Hotel header Starts
 export const HotelNameHeader = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
@@ -546,6 +574,9 @@ export const InlineBtn = styled.button`
     outline: none;
   }
 `;
+// Hotel header Ends
+
+// Hotel Details Starts
 export const HotelDetails = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
@@ -628,6 +659,7 @@ export const DetailList = styled.ul`
     }
   }
 `;
+//  Reccomendation Section
 export const RecommendedSection = styled.div`
   font-size: 1.3rem;
   color: ${(props) => props.theme.secondary.dark3};
@@ -660,6 +692,9 @@ export const RecommendedSection = styled.div`
     }
   }
 `;
+// Hotel Details Ends
+
+// Reviews Section
 export const UserReview = styled.div`
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -747,6 +782,9 @@ export const UserReview = styled.div`
     margin-right: 2rem !important;
   }
 `;
+// Reviews Section ends
+
+// CTA Starts
 export const CtaBtnSection = styled.div`
   padding: 3.5rem 0;
   text-align: center;
@@ -757,6 +795,7 @@ export const CtaBtnSection = styled.div`
     font-size: 1.8rem;
     font-weight: 300;
     margin-bottom: 2.5rem;
+    line-height: 2.5rem;
   }
 
   @media (max-width: 56.25em) {
@@ -814,17 +853,156 @@ export const VisibleAnimatedBtn = styled.button`
     top: -100%;
   }
 `;
+// CTA Ends
+
+// Rooms Page Starts
+export const RoomsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  height: 100%;
+  margin: 2rem;
+
+  a {
+    text-decoration: none;
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 440px) {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1rem;
+    grid-gap: 0.5rem;
+  }
+  @media (max-width: 360px) {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 3rem;
+    grid-gap: 2rem;
+  }
+`;
+
+// Rooms Card
 export const RoomWrapper = styled.div`
-  min-height: 10rem;
-  min-width: 20rem;
-  background-color: bisque;
-  display: inline-block;
-  margin: 1rem;
+  user-select: none;
+  cursor: pointer;
+  grid-row: auto;
 
   & > div {
-    background-image: url(${props => props.url});
+    background-image: url(${(props) => props.url});
     background-size: cover;
+    background-position: top;
     backface-visibility: hidden;
-    background-clip: polygon(0 0, 100% 0, 100% 90%, 0 0);
- }
+    height: 100%;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+
+    & > div {
+      transform: translateX(-100rem);
+    }
+
+    &:hover {
+      & > div {
+        animation-name: ${backgroundAnimate};
+        animation-delay: 0.1s;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & h3 {
+          text-align: center;
+          overflow-wrap: break-word;
+          color: ${(props) => props.theme.secondary.white};
+        }
+      }
+      & h4 {
+        animation-name: ${tranformSide};
+        animation-delay: 0.1s;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    & h4 {
+      display: inline-block;
+      position: absolute;
+      bottom: 1rem;
+      right: 0rem;
+      padding: 0.5rem 1.2rem;
+      max-width: 80%;
+      background-color: ${(props) => props.theme.primary.light};
+      font-size: 1.5rem;
+      backface-visibility: hidden;
+      color: ${(props) => props.theme.secondary.white};
+    }
+  }
+`;
+export const RatingContainer = styled.div`
+  font-size: ${(props) => props.fontSize}rem;
+  margin: ${(props) => props.marginTop}rem 0rem;
+  color: ${(props) => props.color};
+  display: flex;
+  flex-direction: ${(props) => props.direction};
+  justify-content: space-around;
+  align-items: center;
+
+  & span {
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+    color: ${(props) => props.textColor || props.theme.secondary.light1};
+  }
+`;
+// Rooms Page Ends
+
+// NO DATA FOUND
+export const NoDataFound = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  font-size: 3rem;
+  color: ${(props) => props.theme.primary.dark};
+  font-family: "Prompt";
+`;
+
+// Carousel
+export const CarouselContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  & > div {
+    position: relative !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: ${props => props.theme.secondary.dark1};
+
+    & svg{
+      font-size: 2rem;
+      color: ${props => props.theme.secondary.light1};
+    }
+  }
+  & img {
+    position: relative !important;
+    height: auto !important;
+  }
+`;
+export const AboutHotel = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  & div{
+    :nth-child(2){
+      grid-row: 1 2;
+    }
+  }
 `;
