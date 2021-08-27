@@ -4,7 +4,7 @@ import {
   ROOM_DETAILS_FAILED,
   ROOM_DETAILS_SUCCESS,
   CLEAR_ERRORS,
-} from "../constants/RoomConstants";
+} from "../constants/roomConstants";
 
 //  ALL ROOMS REDUCERS
 export const roomsReducer = (state = { rooms: [] }, action) => {
