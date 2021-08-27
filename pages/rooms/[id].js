@@ -6,14 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { clearError } from "../../redux/actions/roomActions";
 import { wrapper } from "../../redux/store";
-import { AboutHotel, HotelNameHeader } from "../../components/StyleComponents";
+import {
+  AboutHotel,
+  HotelNameHeader,
+  HotelDetails,
+  DetailList,
+  HotelTitle,
+  AddressRatings,
+} from "../../components/StyleComponents";
 import Ratings from "../../components/Ratings";
 import Carousel from "../../components/Carousel";
 
 const RoomDetails = () => {
   const { room, error } = useSelector((state) => state.roomDetails);
   const dispatch = useDispatch();
-  
+
   // Before Mounting
   useEffect(() => {
     if (error) {
@@ -28,15 +35,21 @@ const RoomDetails = () => {
         <title>{room.name}</title>
       </Head>
       <Layout>
-        <HotelNameHeader>
+        <HotelTitle>
           <h1>{room.name}</h1>
-          <Ratings rating={room.ratings} />
-        </HotelNameHeader>
+        </HotelTitle>
+        <AddressRatings>
+          <p>{room.address}</p>
+        <Ratings
+          rating={room.ratings}
+        />
+        </AddressRatings>
         <AboutHotel>
-          <div></div>
-          <div>
-            <Carousel images={room.images} />
-          </div>
+          <Carousel images={room.images} />
+          <p>
+            <HotelDetails>{room.description}</HotelDetails>
+            <DetailList><li>Max Guests Capacity - {room.guestCapacity} </li></DetailList>
+          </p>
         </AboutHotel>
       </Layout>
     </>

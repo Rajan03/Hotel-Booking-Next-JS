@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { CarouselContainer } from "./StyleComponents";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Carousel = ({ images }) => {
   const [current, setCurrent] = useState(0);
@@ -14,20 +14,16 @@ const Carousel = ({ images }) => {
   };
 
   return (
-    <CarouselContainer>
+    <>
       {images && images.length > 0 && (
-        <Image
-          src={images[current].url}
-          alt={images[current]._id}
-          layout="fill"
-          objectFit="contain"
-        />
+        <CarouselContainer src={images[current].url}>
+          <div>
+            <FaAngleLeft onClick={showPrev} />
+            <FaAngleRight onClick={showNext} />
+          </div>
+        </CarouselContainer>
       )}
-      <div>
-        <FaArrowLeft onClick={showPrev} />
-        <FaArrowRight onClick={showNext} />
-      </div>
-    </CarouselContainer>
+    </>
   );
 };
 

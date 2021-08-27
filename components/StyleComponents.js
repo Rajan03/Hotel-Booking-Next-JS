@@ -951,9 +951,12 @@ export const RatingContainer = styled.div`
   align-items: center;
 
   & span {
-    margin-left: 0.3rem;
+    margin-left: 0.4rem;
     font-size: 1.3rem;
-    color: ${(props) => props.textColor || props.theme.secondary.light1};
+    color: ${(props) =>
+      props.textColor
+        ? props.theme.secondary.dark1
+        : props.theme.secondary.light1};
   }
 `;
 // Rooms Page Ends
@@ -970,39 +973,91 @@ export const NoDataFound = styled.div`
   font-family: "Prompt";
 `;
 
-// Carousel
-export const CarouselContainer = styled.div`
+export const HotelTitle = styled.div`
+  border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
   align-items: center;
-  position: relative;
 
-  & > div {
-    position: relative !important;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: ${props => props.theme.secondary.dark1};
+  & h1 {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem;
 
-    & svg{
-      font-size: 2rem;
-      color: ${props => props.theme.secondary.light1};
+    @media (max-width: 37.5em) {
+      & {
+        font-size: 1.8rem;
+        padding: 1.25rem 2rem;
+        line-height: 1.9rem;
+      }
     }
   }
-  & img {
-    position: relative !important;
-    height: auto !important;
+
+  & > div {
+    flex: 1;
+    align-self: flex-start;
+  }
+`;
+export const AddressRatings = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 3rem .3rem 3rem;
+
+  & > p {
+    color: ${(props) => props.theme.secondary.dark2};
+    line-height: 2rem;
+    font-size: 1.4rem;
+    margin-right: 2rem;
+  }
+  & > div {
+    @media (max-width: 450px){
+      display: none;
+    }
+  }
+`;
+// Carousel
+export const CarouselContainer = styled.div`
+  min-height: 35rem;
+  & > div {
+    background-image: url(${(props) => props.src});
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: top;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+
+    & svg {
+      font-size: 3rem;
+      color: ${(props) => props.theme.secondary.white};
+      cursor: pointer;
+      @media (max-width: 700px) {
+        color: ${(props) => props.theme.secondary.dark1};
+      }
+    }
+    @media (max-width: 700px) {
+      min-height: 13rem;
+    }
   }
 `;
 export const AboutHotel = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(); */
 
-  & div{
-    :nth-child(2){
-      grid-row: 1 2;
-    }
+  & p {
+    padding: 1rem 2rem;
+  }
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
   }
 `;
