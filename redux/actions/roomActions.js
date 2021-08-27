@@ -5,7 +5,7 @@ import {
   ROOM_DETAILS_SUCCESS,
   ROOM_DETAILS_FAILED,
   CLEAR_ERRORS,
-} from "../constants/RoomConstants";
+} from "../constants/roomConstants";
 import absoluteUrl from "next-absolute-url";
 
 // Server side props provides ctx which will provide access to req object which in turn is required here 
