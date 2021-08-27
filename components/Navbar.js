@@ -44,7 +44,7 @@ const Navbar = () => {
             width="30px"
             className="photo"
           />
-          <span className="name">Jonas</span>
+          <span className="name">Rajan</span>
         </ProfileIcon>
       </NavIcons>
     </NavHeader>
