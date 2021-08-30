@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaRocketchat, FaBookmark, FaSearch } from "react-icons/fa";
 import {
@@ -11,8 +11,21 @@ import {
   SearchInput,
 } from "./StyleComponents";
 import BadgeIcon from "./BadgeIcon";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const [location, setLocation] = useState("");
+  const router = useRouter();
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+    setLocation(e.target.value)
+    if (location.trim()) {
+      router.push(`/rooms/?location=${location}`);
+    } else {
+      router.push(`/rooms`);
+    }
+  };
   return (
     <NavHeader>
       <Logo>
@@ -25,10 +38,15 @@ const Navbar = () => {
         />
       </Logo>
 
-      <SearchBar>
-        <SearchInput type="text" placeholder="Search hotels" />
+      <SearchBar onSubmit={searchHandler}>
+        <SearchInput
+          type="text"
+          placeholder="Search hotels"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
         <SearchButton>
-          <FaSearch />
+          <FaSearch onClick={searchHandler} />
         </SearchButton>
       </SearchBar>
 

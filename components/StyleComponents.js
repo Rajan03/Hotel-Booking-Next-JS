@@ -86,12 +86,10 @@ export const HotelContent = styled.div`
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  min-height: 90vh;
-  max-height: max-content;
   overflow-y: scroll;
 
-  @media (max-width: 400px) {
-    min-height: 150vh;
+  @media (max-width: 460px) {
+    min-height: unset;
   }
 `;
 
@@ -261,6 +259,7 @@ export const ProfileIcon = styled.div`
 // Sidebar Starts
 export const SidebarContainer = styled.div`
   background-color: ${(props) => props.theme.secondary.dark1};
+  min-height: 90vh;
   flex: 0 0 18%;
   display: flex;
   flex-direction: column;
@@ -442,7 +441,7 @@ export const HotelNameHeader = styled.div`
 
   & h1 {
     font-size: 2.25rem;
-    font-weight: 300;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
@@ -581,11 +580,11 @@ export const HotelDetails = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   padding: 1.5rem;
   background-color: ${(props) => props.theme.secondary.light2};
   border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
-  color: ${(props) => props.theme.secondary.dark2};
+  color: ${(props) => props.theme.secondary.dark1};
   line-height: 2rem;
 
   @media (max-width: 56.25em) {
@@ -632,11 +631,13 @@ export const TextParahs = styled.p`
   }
 `;
 export const DetailList = styled.ul`
-  margin: 3rem 0rem;
+  margin: ${(props) => props.my || 3}rem 0rem;
+  padding: ${(props) => props.py || 3}rem 0rem;
   list-style: none;
-  padding: 3rem 0rem;
   border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
   border-top: 0.1rem solid ${(props) => props.theme.secondary.light2};
+  background-color: ${(props) => props.bg && props.theme.secondary.light2};
+  padding: ${(props) => props.bg && "1rem"};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -648,7 +649,14 @@ export const DetailList = styled.ul`
     -ms-flex: 50%;
     flex: 50%;
     margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: ${(props) => props.spanned && props.theme.primary.main};
+    font-weight: ${(props) => props.spanned && 500};
 
+    & span {
+      font-weight: 700;
+      color: ${(props) => props.spanned && props.theme.secondary.dark1};
+    }
     ::before {
       content: "";
       display: inline-block;
@@ -859,24 +867,23 @@ export const VisibleAnimatedBtn = styled.button`
 export const RoomsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 3rem;
-  height: 100%;
-  margin: 2rem;
+  grid-template-rows: repeat(2, 50%);
+  min-height: 100%;
+  padding: 2rem 2rem 0rem 2rem;
 
   a {
     text-decoration: none;
   }
+
   @media (max-width: 700px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(${(props) => props.rows / 2}, 50%);
+    grid-template-columns: repeat(2, 50%);
   }
-  @media (max-width: 440px) {
-    grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 460px) {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(${(props) => props.rows}, 100%);
     margin: 1rem;
-    grid-gap: 0.5rem;
-  }
-  @media (max-width: 360px) {
-    grid-template-columns: repeat(1, 1fr);
-    margin: 3rem;
     grid-gap: 2rem;
   }
 `;
@@ -886,6 +893,43 @@ export const RoomWrapper = styled.div`
   user-select: none;
   cursor: pointer;
   grid-row: auto;
+  max-width: 90%;
+  max-height: 90%;
+
+  @media (max-width: 460px) {
+    max-width: 100%;
+    min-height: 30vh;
+  }
+
+  &:hover {
+    & > div {
+      min-height: 100%;
+
+      & > div {
+        animation-name: ${backgroundAnimate};
+        animation-delay: 0.1s;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        min-height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backface-visibility: hidden;
+
+        & h3 {
+          text-align: center;
+          color: ${(props) => props.theme.secondary.white};
+        }
+      }
+    }
+    & h4 {
+      animation-name: ${tranformSide};
+      animation-delay: 0.1s;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+  }
 
   & > div {
     background-image: url(${(props) => props.url});
@@ -899,32 +943,6 @@ export const RoomWrapper = styled.div`
 
     & > div {
       transform: translateX(-100rem);
-    }
-
-    &:hover {
-      & > div {
-        animation-name: ${backgroundAnimate};
-        animation-delay: 0.1s;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        & h3 {
-          text-align: center;
-          overflow-wrap: break-word;
-          color: ${(props) => props.theme.secondary.white};
-        }
-      }
-      & h4 {
-        animation-name: ${tranformSide};
-        animation-delay: 0.1s;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-      }
     }
 
     & h4 {
@@ -981,15 +999,20 @@ export const HotelTitle = styled.div`
 
   & h1 {
     font-size: 2.25rem;
-    font-weight: 300;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     padding: 1.5rem 3rem;
+    flex: 70%;
 
     @media (max-width: 37.5em) {
       & {
         font-size: 1.8rem;
-        padding: 1.25rem 2rem;
+        padding: 1.25rem 1rem;
         line-height: 1.9rem;
       }
     }
@@ -1004,7 +1027,7 @@ export const AddressRatings = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1rem 3rem .3rem 3rem;
+  padding: 1rem 3rem 0.3rem 3rem;
 
   & > p {
     color: ${(props) => props.theme.secondary.dark2};
@@ -1013,14 +1036,14 @@ export const AddressRatings = styled.div`
     margin-right: 2rem;
   }
   & > div {
-    @media (max-width: 450px){
+    @media (max-width: 450px) {
       display: none;
     }
   }
 `;
 // Carousel
 export const CarouselContainer = styled.div`
-  min-height: 35rem;
+  /* min-height: 35rem; */
   & > div {
     background-image: url(${(props) => props.src});
     background-repeat: no-repeat;
@@ -1051,13 +1074,307 @@ export const CarouselContainer = styled.div`
 export const AboutHotel = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(); */
 
   & p {
-    padding: 1rem 2rem;
+    padding: 0rem 2rem;
+
+    & > h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: ${(props) => props.theme.secondary.main};
+      border: 1px solid ${(props) => props.theme.secondary.light3};
+      border-radius: 0.2rem;
+      border-bottom: none;
+      padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+
+      :not(:first-child) {
+        margin-top: 3rem;
+      }
+    }
   }
 
   @media (max-width: 660px) {
     grid-template-columns: 1fr;
+  }
+`;
+export const RoomBookBtn = styled.button`
+  padding: 1rem 2rem;
+  margin-right: 2rem;
+  font-size: 1.3rem;
+  border: none;
+  font-weight: 300;
+  text-transform: uppercase;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  flex: 10%;
+  display: inline;
+  background: ${(props) => props.theme.primary.light};
+  color: ${(props) => props.theme.secondary.white};
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  @media (max-width: 400px) {
+    padding: 1rem;
+  }
+
+  :hover {
+    background: ${(props) => props.theme.primary.main};
+    box-shadow: 0rem 1px 0.3rem rgba(0, 0, 0, 0.3);
+  }
+`;
+export const Filterbox = styled.div`
+  padding: 1rem 2rem;
+  border-bottom: 0.1rem solid ${(props) => props.theme.secondary.light2};
+`;
+
+export const DialogBox = styled.div`
+  min-height: 100%;
+  height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > form {
+    min-width: 40%;
+    min-height: 50%;
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme.secondary.light2};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    position: relative;
+    box-shadow: 0 0 1rem ${(props) => props.theme.secondary.dark1};
+
+    & > svg {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      font-size: 3rem;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: ${(props) => props.theme.secondary.light2};
+      color: ${(props) => props.theme.primary.dark};
+    }
+    & > div {
+      margin: 0 auto;
+      min-width: 60%;
+      display: inline-block;
+
+      & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        :not(:first-child) {
+          margin-top: 1rem;
+        }
+
+        & > span {
+          flex: 40%;
+          font-size: 1.3rem;
+          font-weight: 700;
+          letter-spacing: 0.2rem;
+          color: ${(props) => props.theme.primary.dark};
+        }
+        & > select,
+        & > input {
+          text-align: start;
+          flex: 60%;
+          outline: none;
+          border: none;
+          font-weight: 500;
+          padding: 0.5rem;
+          border-radius: 0.3rem;
+          box-shadow: 0 1rem 1rem ${(props) => props.theme.secondary.light2};
+        }
+        & > select {
+          color: ${(props) => props.theme.secondary.black};
+          background-color: ${(props) => props.theme.secondary.white};
+        }
+      }
+    }
+    & > button {
+      border: none;
+      outline: none;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      border-radius: 0.3rem;
+      background-color: ${(props) => props.theme.primary.main};
+      color: ${(props) => props.theme.secondary.light1};
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.2rem;
+      cursor: pointer;
+      transition: all 0.2s linear;
+      box-shadow: 0 0.1rem 0.9rem ${(props) => props.theme.secondary.dark3};
+
+      :hover {
+        background-color: ${(props) => props.theme.primary.dark};
+      }
+    }
+  }
+`;
+export const LoginContainer = styled.div`
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  background-color: rgba(0, 0, 0,.1);
+  padding: 3rem;
+
+  & small {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${(props) => props.theme.secondary.light1};
+    display: inline-block;
+  }
+`;
+
+export const LoginBox = styled.div`
+  max-width: 100%;
+  min-width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 1rem;
+
+  & > div {
+    height: 100%;
+
+    :first-child {
+      flex: 70%;
+      margin: 0 2rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      background-image: url("https://res.cloudinary.com/dev-rajan/image/upload/v1626012610/Hotel-Management-App/hotel-2_yvhi1u.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+
+      & > div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    :nth-child(2) {
+      flex: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.7);
+
+      & div {
+        display: flex;
+        align-items: center;
+
+        & span {
+          font-size: 1.6rem;
+          font-weight: 800;
+          color: ${(props) => props.theme.secondary.dark1};
+          margin-top: 0.6rem;
+          margin-left: 1rem;
+
+          ::selection {
+            background-color: ${(props) => props.theme.primary.main};
+            color: ${(props) => props.theme.secondary.light1};
+          }
+        }
+      }
+    }
+
+    & > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0 3rem;
+
+      & span {
+        margin: 1rem 0;
+      }
+      & label {
+        font-weight: 600;
+        color: ${(props) => props.theme.secondary.dark1};
+        font-size: 1.2rem;
+
+        ::selection {
+          background-color: ${(props) => props.theme.primary.main};
+          color: ${(props) => props.theme.secondary.light1};
+        }
+      }
+      & input {
+        display: block;
+        min-width: 100%;
+        border: none;
+        outline: none;
+        padding: 1rem;
+        ::selection {
+          background-color: ${(props) => props.theme.primary.main};
+          color: ${(props) => props.theme.secondary.light1};
+        }
+        border-radius: 0.5rem;
+        color: ${(props) => props.theme.secondary.dark1};
+        background: ${(props) => props.theme.secondary.light2};
+      }
+      & button {
+        margin: 2rem 0;
+        padding: 0.9rem 0;
+        background-color: ${(props) => props.theme.primary.main};
+        color: ${(props) => props.theme.secondary.light1};
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.2rem;
+        border: none;
+        outline: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        box-shadow: 0 0.8rem 3rem rgba(0, 0, 0, 0.3);
+        transform: scaleX(1.01);
+        transition: all 0.2s linear;
+
+        :hover {
+          background-color: ${(props) => props.theme.primary.dark};
+          box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+          transform: scaleX(1.017);
+        }
+        :focus {
+          transform: scaleX(1);
+        }
+      }
+      & a {
+        text-decoration: none;
+        color: ${(props) => props.theme.primary.dark};
+      }
+    }
+    & > p {
+      font-size: 1.1rem;
+      text-align: center;
+      & a {
+        text-decoration: none;
+        color: ${(props) => props.theme.primary.dark};
+      }
+    }
   }
 `;

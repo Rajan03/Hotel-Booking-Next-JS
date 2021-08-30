@@ -19,12 +19,13 @@ class APIFeatures {
 
   filter = () => {
     const queryCopy = { ...this.queryString };
-
     // Remove Fields from query
     const queryFields = ["location", "page"];
-
+    
     queryFields.forEach((fld) => delete queryCopy[fld]);
+    // console.log(queryCopy)
     this.query = this.query.find(queryCopy);
+    
     return this;
   };
 

@@ -23,8 +23,7 @@ export default function Home() {
     },
   ];
   return (
-    <Layout>
-      <Head><title>Hotel Las Palm | Home</title></Head>
+    <Layout title={'| Home'}>
       <HotelGallery images={images}/>
       <HotelHeader />
       <HotelDetails>

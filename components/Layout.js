@@ -3,10 +3,12 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { ToastContainer } from "react-toastify";
 import { Container, ContentContainer, HotelContent } from "./StyleComponents";
+import Head from "next/head";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title }) => {
   return (
     <>
+    <Head><title>Hotel Las Palm {title}</title></Head>
       <Container>
         <ToastContainer
           position="bottom-right"
