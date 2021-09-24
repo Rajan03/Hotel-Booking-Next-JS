@@ -14,21 +14,23 @@ export default NextAuth({
       async authorize(credentials) {
         connectDb();
         const { email, password } = credentials;
+
         // Check email password
         if (!email || !password) {
           throw new Error("Please Enter valid email and password :(");
         }
         // Find User
-        const user = await User.findone({ email }).select("+password");
+        const user = await User.findOne({ email }).select("+password");
+
         if (!user) {
           throw new Error("Ivalid email or password :(");
         }
         //  validate user
-        const isValidPassword = await user.checkPassword();
+        const isValidPassword = await user.checkPassword(password);
         if (!isValidPassword) {
           throw new Error("Ivalid email or password :(");
         }
-
+        console.log(user);
         return Promise.resolve(user);
       },
     }),

@@ -9,7 +9,7 @@ const connectDb = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then((res) => console.log("Connected to DB"))
+    .then((res) => console.log("Connected to DB" + res))
     .catch((err) => console.log("ERROR IN DB CONNECTION: " + err));
 };
 

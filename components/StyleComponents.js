@@ -1222,7 +1222,7 @@ export const DialogBox = styled.div`
     }
   }
 `;
-export const LoginContainer = styled.div`
+export const FormContainer = styled.div`
   height: 100vh;
   min-height: 100vh;
   display: flex;
@@ -1230,8 +1230,23 @@ export const LoginContainer = styled.div`
   align-items: center;
   position: relative;
 
-  background-color: rgba(0, 0, 0,.1);
-  padding: 3rem;
+  & > span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://res.cloudinary.com/dev-rajan/image/upload/v1626012610/Hotel-Management-App/hotel-2_yvhi1u.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -1;
+    background-position: top;
+
+    & > div {
+      min-width: 100%;
+      min-height: 100%;
+      background-color: rgba(128, 24, 62, 0.8);
+    }
+  }
 
   & small {
     position: absolute;
@@ -1244,137 +1259,120 @@ export const LoginContainer = styled.div`
   }
 `;
 
-export const LoginBox = styled.div`
-  max-width: 100%;
-  min-width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+export const FormBox = styled.div`
+  min-width: calc(30% - 2rem);
+  height: calc(100% - (2rem * 3));
+  margin: 1rem;
   border-radius: 1rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.7);
 
-  & > div {
-    height: 100%;
+  & div {
+    display: flex;
+    align-items: center;
 
-    :first-child {
-      flex: 70%;
-      margin: 0 2rem;
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      background-image: url("https://res.cloudinary.com/dev-rajan/image/upload/v1626012610/Hotel-Management-App/hotel-2_yvhi1u.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: top;
+    & span {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: ${(props) => props.theme.secondary.dark1};
+      margin-top: 0.6rem;
+      margin-left: 1rem;
 
-      & > div {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-    }
-
-    :nth-child(2) {
-      flex: 30%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1rem;
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.7);
-
-      & div {
-        display: flex;
-        align-items: center;
-
-        & span {
-          font-size: 1.6rem;
-          font-weight: 800;
-          color: ${(props) => props.theme.secondary.dark1};
-          margin-top: 0.6rem;
-          margin-left: 1rem;
-
-          ::selection {
-            background-color: ${(props) => props.theme.primary.main};
-            color: ${(props) => props.theme.secondary.light1};
-          }
-        }
-      }
-    }
-
-    & > form {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0 3rem;
-
-      & span {
-        margin: 1rem 0;
-      }
-      & label {
-        font-weight: 600;
-        color: ${(props) => props.theme.secondary.dark1};
-        font-size: 1.2rem;
-
-        ::selection {
-          background-color: ${(props) => props.theme.primary.main};
-          color: ${(props) => props.theme.secondary.light1};
-        }
-      }
-      & input {
-        display: block;
-        min-width: 100%;
-        border: none;
-        outline: none;
-        padding: 1rem;
-        ::selection {
-          background-color: ${(props) => props.theme.primary.main};
-          color: ${(props) => props.theme.secondary.light1};
-        }
-        border-radius: 0.5rem;
-        color: ${(props) => props.theme.secondary.dark1};
-        background: ${(props) => props.theme.secondary.light2};
-      }
-      & button {
-        margin: 2rem 0;
-        padding: 0.9rem 0;
+      ::selection {
         background-color: ${(props) => props.theme.primary.main};
         color: ${(props) => props.theme.secondary.light1};
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: 0.2rem;
-        border: none;
-        outline: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        box-shadow: 0 0.8rem 3rem rgba(0, 0, 0, 0.3);
-        transform: scaleX(1.01);
-        transition: all 0.2s linear;
-
-        :hover {
-          background-color: ${(props) => props.theme.primary.dark};
-          box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
-          transform: scaleX(1.017);
-        }
-        :focus {
-          transform: scaleX(1);
-        }
-      }
-      & a {
-        text-decoration: none;
-        color: ${(props) => props.theme.primary.dark};
-      }
-    }
-    & > p {
-      font-size: 1.1rem;
-      text-align: center;
-      & a {
-        text-decoration: none;
-        color: ${(props) => props.theme.primary.dark};
       }
     }
   }
+  & > form {
+    align-self: center;
+    min-width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 3rem;
+
+    & span {
+      margin: 1rem 0;
+    }
+    & label {
+      font-weight: 600;
+      color: ${(props) => props.theme.secondary.dark1};
+      font-size: 1.2rem;
+
+      ::selection {
+        background-color: ${(props) => props.theme.primary.main};
+        color: ${(props) => props.theme.secondary.light1};
+      }
+    }
+    & input[type="email"], 
+    & input[type="password"],
+    & input[type="text"] {
+      display: block;
+      min-width: 100%;
+      border: none;
+      outline: none;
+      padding: 1rem;
+      ::selection {
+        background-color: ${(props) => props.theme.primary.main};
+        color: ${(props) => props.theme.secondary.light1};
+      }
+      border-radius: 0.5rem;
+      color: ${(props) => props.theme.secondary.dark1};
+      background: ${(props) => props.theme.secondary.light2};
+    }
+    & input[type="submit"] {
+      margin: 2rem 0;
+      padding: 0.9rem 0;
+      background-color: ${(props) => props.theme.primary.main};
+      color: ${(props) => props.theme.secondary.light1};
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.2rem;
+      border: none;
+      outline: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 0.8rem 3rem rgba(0, 0, 0, 0.3);
+      transform: scaleX(1.01);
+      transition: all 0.2s linear;
+
+      :hover {
+        background-color: ${(props) => props.theme.primary.dark};
+        box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+        transform: scaleX(1.017);
+      }
+      :focus {
+        transform: scaleX(1);
+      }
+    }
+    & a {
+      text-decoration: none;
+      color: ${(props) => props.theme.primary.dark};
+    }
+  }
+  & > p {
+    font-size: 1.2rem;
+    text-align: center;
+    min-width: 100%;
+    & a {
+      color: ${(props) => props.theme.primary.dark};
+    }
+  }
 `;
+
+export const AvatarView = styled.div`
+width: 20%;
+height: 30%;
+max-width: 20%;
+max-height: 30%;
+position: relative;
+background-color: #fff;
+border-radius: 50%;
+`
